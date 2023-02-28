@@ -1,6 +1,7 @@
 "use strict";
 
 const eventPool = require("../eventPool");
+const thankyou = require("./handler");
 
 let Chance = require("chance");
 let chance = new Chance();
@@ -17,8 +18,9 @@ let createPackage = (store = chance.word({ syllables: 1 })) => {
 
 const confirmOrder = (payload) => {
   setTimeout(() => {
-    console.log(`thank you for shopping with us, ${payload.customer}`);
-  }, 5000);
+    thankyou(payload);
+    // console.log(`thank you for shopping with us, ${payload.customer}`);
+  }, 2000);
 }
 
 module.exports = { createPackage, confirmOrder };
