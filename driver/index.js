@@ -4,11 +4,12 @@ const Chance = require("chance");
 const chance = new Chance();
 
 const eventPool = require("../eventPool");
+const logger = require("../logger");
 
 const pickedup = (payload) => {
   setTimeout(() => {
     eventPool.emit("PACKAGE_PICKUPED", payload);
-    console.log("package picked up: package ID");
+    console.log(`package picked up:${payload.orderId}`);
     logger(payload,"PickedUp")
   }, 2000);
 };
@@ -23,27 +24,11 @@ const inTransit = (payload) => {
 
 const delivered = (payload) => {
   setTimeout(() => {
-    eventPool.emit("DELIEVERED", payload);
+    eventPool.emit("DELIVERED", payload);
     console.log(`DRIVER: delivered ${payload.orderId}`);
     logger(payload,"delivered");
   },5000);
 }
-
-const logger = (payload, str) => {
-  let date = Date.now();
-  let timeStemp = new Date(date).toUTCString();
-  console.log(
-    `EVENT: {\n
-      event: "${str}",\n
-      time: "${timeStemp}",\n
-      payload: {\n
-          store: "${payload.store}", \n
-          orderId: "${payload.orderId}", \n
-          customer: "${payload.customer}", \n
-          address: "${payload.address}", \n
-      },
-  }`);
-};
 
 
 module.exports = {

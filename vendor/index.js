@@ -5,10 +5,10 @@ const eventPool = require("../eventPool");
 let Chance = require("chance");
 let chance = new Chance();
 
-let createPackage = (newStore) => {
+let createPackage = (store = chance.word({ syllables: 1 })) => {
   let payload = {
     orderId: chance.guid(),
-    store: newStore,
+    store:`${store}'s store`,
     customer: chance.name(),
     address: chance.address()
   }
@@ -17,8 +17,8 @@ let createPackage = (newStore) => {
 
 const confirmOrder = (payload) => {
   setTimeout(() => {
-    console.log(`thank you, ${payload.custormer}`);
-  }, 8000);
+    console.log(`thank you for shopping with us, ${payload.customer}`);
+  }, 5000);
 }
 
 module.exports = { createPackage, confirmOrder };

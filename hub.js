@@ -20,5 +20,8 @@ eventPool.on("IN_TRANSIT", delivered);
 //As a driver, I want to alert the system and vendor when a package has been delivered.
 eventPool.on("DELIVERED", confirmOrder);
 
-createPackage("Brenda's");
+setInterval(() => {
+  createPackage();
+}, 1000);
+
 
